@@ -1,55 +1,48 @@
 import m5
 from m5.objects import *
 
-# Create a system with a single Xeon CPU
 system = System()
+
 system.clk_domain = SrcClockDomain()
-system.clk_domain.clock = '2.5GHz'
+system.clk_domain.clock = '1GHz'
 system.clk_domain.voltage_domain = VoltageDomain()
 
 system.mem_mode = 'timing'
 system.mem_ranges = [AddrRange('512MB')]
 
+system.cpu = X86TimingSimpleCPU()
 system.membus = SystemXBar()
 
-system.mem_ctrl = DDR3_1600_8x8()
+system.cpu.icache_port = system.membus.cpu_side_ports
+system.cpu.dcache_port = system.membus.cpu_side_ports
+
+system.cpu.createInterruptController()
+system.cpu.interrupts[0].pio = system.membus.mem_side_ports
+system.cpu.interrupts[0].int_requestor = system.membus.cpu_side_ports
+system.cpu.interrupts[0].int_responder = system.membus.mem_side_ports
+
+system.system_port = system.membus.cpu_side_ports
+
+system.mem_ctrl = MemCtrl()
+system.mem_ctrl.dram = DDR3_1600_8x8()
+system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
-system.cpu = DerivO3CPU()
-system.cpu.clock_domain = SrcClockDomain()
-system.cpu.clock_domain.clock = '2.5GHz'
-system.cpu.voltage_domain = VoltageDomain()
+binary = 'tests/test-progs/hello/bin/x86/linux/hello'
 
-system.cpu.icache = L1ICache()
-system.cpu.dcache = L1DCache()
+# for gem5 V21 and beyond
+system.workload = SEWorkload.init_compatible(binary)
 
-system.cpu.icache.port = system.cpu.icache.cpu_side
-system.cpu.dcache.port = system.cpu.dcache.cpu_side
-
-system.cpu.icache.mem_side = system.membus.mem_side_ports
-system.cpu.dcache.mem_side = system.membus.mem_side_ports
-
-system.cpu.l2cache = L2Cache()
-system.cpu.l2cache.port = system.membus.mem_side_ports
-
-# Create a process and set its command-line arguments
 process = Process()
-process.cmd = ['hello', 'world']
-
-# Assign the process to the CPU
+process.cmd = [binary]
 system.cpu.workload = process
 system.cpu.createThreads()
 
-# Connect physmem to the mem_ctrl
-system.physmem = SimpleMemory(range=AddrRange('512MB'))
-system.physmem.port = system.mem_ctrl.port
+root = Root(full_system = False, system = system)
+m5.instantiate()
 
-# Set up the simulation statistics
-system.cpu.stats = Stats()
-system.cpu.stats.addList(['ipc', 'cpi', 'idleCycles', 'brPredAccuracy'])
+print("Beginning simulation!")
+exit_event = m5.simulate()
 
-# Run the simulation
-sim = Simulation()
-sim.setSystem(system)
-sim.setSimulationEndTime('10us')
-sim.run()
+print('Exiting @ tick {} because {}'
+      .format(m5.curTick(), exit_event.getCause()))
