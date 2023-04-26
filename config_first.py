@@ -12,9 +12,6 @@ system.mem_ranges = [AddrRange('512MB')]
 
 system.membus = SystemXBar()
 
-system.physmem = SimpleMemory()
-system.physmem.port = system.membus.cpu_side_ports
-
 system.mem_ctrl = DDR3_1600_8x8()
 system.mem_ctrl.port = system.membus.master
 
@@ -42,6 +39,10 @@ process.cmd = ['hello', 'world']
 # Assign the process to the CPU
 system.cpu.workload = process
 system.cpu.createThreads()
+
+# Connect physmem to the mem_ctrl
+system.physmem = SimpleMemory(range=AddrRange('512MB'))
+system.physmem.port = system.mem_ctrl.port
 
 # Set up the simulation statistics
 system.cpu.stats = Stats()
