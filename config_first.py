@@ -29,7 +29,7 @@ system.mem_ctrl.dram = DDR3_1600_8x8()
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
-binary = sys.argv[1]
+binary = 'gem5/tests/test-progs/hello/bin/x86/linux/hello'
 
 # for gem5 V21 and beyond
 system.workload = SEWorkload.init_compatible(binary)
