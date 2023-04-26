@@ -13,7 +13,7 @@ system.mem_ranges = [AddrRange('512MB')]
 system.membus = SystemXBar()
 
 system.mem_ctrl = DDR3_1600_8x8()
-system.mem_ctrl.port = system.membus.master
+system.mem_ctrl.port = system.membus.mem_side_ports
 
 system.cpu = DerivO3CPU()
 system.cpu.clock_domain = SrcClockDomain()
@@ -30,7 +30,7 @@ system.cpu.icache.mem_side = system.membus.mem_side_ports
 system.cpu.dcache.mem_side = system.membus.mem_side_ports
 
 system.cpu.l2cache = L2Cache()
-system.cpu.l2cache.port = system.membus.master
+system.cpu.l2cache.port = system.membus.mem_side_ports
 
 # Create a process and set its command-line arguments
 process = Process()
