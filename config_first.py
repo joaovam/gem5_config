@@ -26,8 +26,8 @@ system.cpu.dcache = L1DCache()
 system.cpu.icache.port = system.cpu.icache.cpu_side
 system.cpu.dcache.port = system.cpu.dcache.cpu_side
 
-system.cpu.icache.mem_side = system.membus.master
-system.cpu.dcache.mem_side = system.membus.master
+system.cpu.icache.mem_side = system.membus.mem_side_ports
+system.cpu.dcache.mem_side = system.membus.mem_side_ports
 
 system.cpu.l2cache = L2Cache()
 system.cpu.l2cache.port = system.membus.master
