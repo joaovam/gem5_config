@@ -9,8 +9,10 @@ class L1Cache(Cache):
     tgts_per_mshr  = 20
 
     def __init__(self, options):
+        if not options or not options.L1Assoc:
+            return
 
-        self.assoc = options.L1Assoc if options or options.L1Assoc else 2
+        self.assoc = options.L1Assoc
 
     def connectCPU(self, cpu):
         # need to define this in a base class!
