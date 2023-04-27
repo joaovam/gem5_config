@@ -10,6 +10,8 @@ class L1Cache(Cache):
 
     def __init__(self, options):
 
+        self.assoc = options.L1Assoc if options or options.L1Assoc else 2
+
     def connectCPU(self, cpu):
         # need to define this in a base class!
         raise NotImplementedError
