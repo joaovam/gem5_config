@@ -3,17 +3,19 @@ from m5.objects import *
 import argparse
 from Cache.l1_cache import *
 from Cache.l2_cache import L2Cache
-
+from Cache.l3_cache import L3Cache
 
 parser = argparse.ArgumentParser(description='A simple system with 2-level cache.')
 parser.add_argument("binary", default="", nargs="?", type=str,
                     help="Path to the binary to execute.")
 parser.add_argument("--l1i_size",
-                    help=f"L1 instruction cache size. Default: 16kB.")
+                    help=f"L1 instruction cache size. Default: 32kB.")
 parser.add_argument("--l1d_size",
-                    help="L1 data cache size. Default: Default: 64kB.")
+                    help="L1 data cache size. Default: Default: 32kB.")
 parser.add_argument("--l2_size",
                     help="L2 cache size. Default: 256kB.")
+parser.add_argument("--l3_size",
+                    help="L3 cache size. Default: 512kB.")
 
 options = parser.parse_args()
 system = System()
@@ -36,15 +38,23 @@ system.cpu.dcache = L1DCache(options)
 system.cpu.icache.connectCPU(system.cpu)
 system.cpu.dcache.connectCPU(system.cpu)
 
-system.l2bus=L2XBar()
+system.l2bus = L2XBar()
+system.l3bus = L2XBar()
 
 system.cpu.icache.connectBus(system.l2bus)
 system.cpu.dcache.connectBus(system.l2bus)
 
+
 system.l2cache = L2Cache(options)
+system.l3cache = L3Cache(options)
+
 system.l2cache.connectCPUSideBus(system.l2bus)
+system.l3cache.connectCPUSideBus(system.l3bus)
+
+system.l2cache.connectMemSideBus(system.l3bus)
 system.membus = SystemXBar()
-system.l2cache.connectMemSideBus(system.membus)
+
+system.l3cache.connectMemSideBus(system.membus)
 
 system.cpu.createInterruptController()
 system.cpu.interrupts[0].pio = system.membus.mem_side_ports
