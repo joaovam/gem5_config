@@ -6,7 +6,7 @@ class L1Cache(Cache):
     data_latency = 2
     response_latency = 2
     mshrs = 4
-    tagts_per_mshr = 20
+    tgts_per_mshr  = 20
 
     def __init__(self, options):
 
