@@ -2,7 +2,7 @@ from m5.objects import Cache
 
 class L2Cache(Cache):
     assoc = 2
-    size= '256kB'
+    size = '256kB'
     tag_latency = 2
     data_latency = 2
     response_latency = 2
@@ -11,7 +11,7 @@ class L2Cache(Cache):
 
     def __init__(self, options=None):
         super(L2Cache, self).__init__()
-        if not options or not options.l2_size:
+        if  options or options.l2_size:
             self.size = options.l2_size
 
     def connectCPU(self, cpu):
