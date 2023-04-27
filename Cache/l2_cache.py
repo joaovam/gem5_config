@@ -11,8 +11,9 @@ class L2Cache(Cache):
 
     def __init__(self, options=None):
         super(L2Cache, self).__init__()
-        if  options or options.l2_size:
-            self.size = options.l2_size
+        if not options or not options.l2_size:
+            return
+        self.size = options.l2_size
 
     def connectCPU(self, cpu):
         # need to define this in a base class!
