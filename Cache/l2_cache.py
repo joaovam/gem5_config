@@ -10,7 +10,7 @@ class L2Cache(Cache):
     tgts_per_mshr  = 20
 
     def __init__(self,options):
-        size
+        pass
 
     def connectCPU(self, cpu):
         # need to define this in a base class!
