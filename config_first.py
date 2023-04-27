@@ -4,7 +4,7 @@ import argparse
 from Cache.l1_cache import *
 from Cache.l2_cache import L2Cache
 
-def define_args():
+
       parser = argparse.ArgumentParser(description='A simple system with 2-level cache.')
       parser.add_argument("binary", default="", nargs="?", type=str,
                           help="Path to the binary to execute.")
@@ -14,9 +14,8 @@ def define_args():
                           help="L1 data cache size. Default: Default: 64kB.")
       parser.add_argument("--l2_size",
                           help="L2 cache size. Default: 256kB.")
-      return parser.parse_args()
-def create_architecture():
-      options = define_args()
+
+      options = parser.parse_args()
       system = System()
 
       system.clk_domain = SrcClockDomain()
@@ -78,5 +77,3 @@ def create_architecture():
       print('Exiting @ tick {} because {}'
             .format(m5.curTick(), exit_event.getCause()))
 
-if __name__=='__main__':
-      create_architecture()
