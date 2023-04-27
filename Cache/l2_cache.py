@@ -15,9 +15,8 @@ class L2Cache(Cache):
             return
         self.size = options.l2_size
 
-    def connectCPU(self, cpu):
-        # need to define this in a base class!
-        raise NotImplementedError
+    def connectCPUSideBus(self, bus):
+        self.cpu_side = bus.mem_side_ports
 
-    def connectBus(self, bus):
+    def connectMemSideBus(self, bus):
         self.mem_side = bus.cpu_side_ports
