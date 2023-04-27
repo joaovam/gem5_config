@@ -10,10 +10,9 @@ class L1Cache(Cache):
 
     def __init__(self, options):
         super(L1Cache, self).__init__()
-        if not options or not options.L1Assoc:
+        if not options or not options.L1_assoc:
             return
 
-        self.assoc = options.L1Assoc
 
     def connectCPU(self, cpu):
         # need to define this in a base class!
