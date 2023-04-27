@@ -44,6 +44,6 @@ class L1DCache(L1Cache):
         self.size = options.L1IDacheSize
 
     def connectCPU(self, cpu):
-        self.cpu_side = cpu.icache_port
+        self.cpu_side = cpu.dcache_port
 
 

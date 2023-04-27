@@ -14,9 +14,11 @@ system.clk_domain.voltage_domain = VoltageDomain()
 system.mem_mode = 'timing'
 system.mem_ranges = [AddrRange('512MB')]
 
+#creating CPU
 system.cpu = X86TimingSimpleCPU()
 system.membus = SystemXBar()
 
+#Connecting Cache
 system.cpu.icache = L1ICache()
 system.cpu.dcache = L1DCache()
 
