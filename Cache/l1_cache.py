@@ -9,6 +9,7 @@ class L1Cache(Cache):
     tgts_per_mshr  = 20
 
     def __init__(self, options):
+        super(L1Cache, self).__init__()
         if not options or not options.L1Assoc:
             return
 
