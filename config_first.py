@@ -5,9 +5,12 @@ from Cache.l1_cache import *
 from Cache.l2_cache import L2Cache
 from Cache.l3_cache import L3Cache
 
-parser = argparse.ArgumentParser(description='A simple system with 2-level cache.')
+parser = argparse.ArgumentParser(description='An O3 system with 3-level cache.')
+
 parser.add_argument("binary", default="", nargs="?", type=str,
                     help="Path to the binary to execute.")
+parser.add_argument("--arguments", help="Arguments to be passed to binary program")
+parser.add_argument("--cores", help="The number of cores in the simulated machine",type=int)
 parser.add_argument("--l1i_size",
                     help=f"L1 instruction cache size. Default: 32kB.")
 parser.add_argument("--l1d_size",
@@ -25,24 +28,26 @@ system.clk_domain.clock = '1GHz'
 system.clk_domain.voltage_domain = VoltageDomain()
 
 system.mem_mode = 'timing'
-system.mem_ranges = [AddrRange('512MB')]
+system.mem_ranges = [AddrRange('8GB')]
 
 #creating CPU
-system.cpu = X86TimingSimpleCPU()
+system.cpu = [O3CPU(cpu_id=i) for i in range(options.cores)]
 system.membus = SystemXBar()
 
 #Connecting Cache
-system.cpu.icache = L1ICache(options)
-system.cpu.dcache = L1DCache(options)
+for i in range(options.cores):
+    system.cpu[i].icache = L1ICache(options)
+    system.cpu[i].dcache = L1DCache(options)
 
-system.cpu.icache.connectCPU(system.cpu)
-system.cpu.dcache.connectCPU(system.cpu)
+    system.cpu[i].icache.connectCPU(system.cpu)
+    system.cpu[i].dcache.connectCPU(system.cpu)
 
 system.l2bus = L2XBar()
 system.l3bus = L2XBar()
 
-system.cpu.icache.connectBus(system.l2bus)
-system.cpu.dcache.connectBus(system.l2bus)
+for i in range(options.cores):
+    system.cpu[i].icache.connectBus(system.l2bus)
+    system.cpu[i].dcache.connectBus(system.l2bus)
 
 
 system.l2cache = L2Cache(options)
@@ -56,10 +61,11 @@ system.membus = SystemXBar()
 
 system.l3cache.connectMemSideBus(system.membus)
 
-system.cpu.createInterruptController()
-system.cpu.interrupts[0].pio = system.membus.mem_side_ports
-system.cpu.interrupts[0].int_requestor = system.membus.cpu_side_ports
-system.cpu.interrupts[0].int_responder = system.membus.mem_side_ports
+for i in range(options.cores):
+    system.cpu[i].createInterruptController()
+    system.cpu[i].interrupts[0].pio = system.membus.mem_side_ports
+    system.cpu[i].interrupts[0].int_requestor = system.membus.cpu_side_ports
+    system.cpu[i].interrupts[0].int_responder = system.membus.mem_side_ports
 
 system.system_port = system.membus.cpu_side_ports
 
@@ -75,6 +81,7 @@ system.workload = SEWorkload.init_compatible(binary)
 
 process = Process()
 process.cmd = [binary]
+#FIX - create threads with multiple CPUs
 system.cpu.workload = process
 system.cpu.createThreads()
 
