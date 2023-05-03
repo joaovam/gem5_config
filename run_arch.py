@@ -4,6 +4,8 @@ import argparse
 
 gem5_location = "/gem5/gem5/build/X86/gem5.opt"
 script = "/gem5/gem5_config/arch_config.py"
+programs_location = "/CAPBenchmarks/x86/bin/"
+
 classes = ["Tiny", "Small"]
 programs = ["FAST", "FN", "GF", "IS", "KM", "LU", "NB", "RT", "TSP"]
 
@@ -42,7 +44,7 @@ def main():
                                               --l1d_size 40kB\
                                               --l2_size 512kB\
                                               --l3_size 16MB \
-                                              {program}.intel'
+                                              {programs_location}{program}.intel'
 
 
 
