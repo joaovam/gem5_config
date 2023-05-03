@@ -32,7 +32,7 @@ system.clk_domain.clock = options.clock
 system.clk_domain.voltage_domain = VoltageDomain()
 
 system.mem_mode = 'timing'
-system.mem_ranges = [AddrRange('16GB')]
+system.mem_ranges = [AddrRange('32GB')]
 
 #creating CPU
 system.cpu = [O3CPU(cpu_id=i) for i in range(options.cores)]
