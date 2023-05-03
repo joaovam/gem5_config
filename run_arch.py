@@ -40,8 +40,8 @@ def main():
                 command = gem5_location + " " + script + f' --clock 3.2GHz\
                                               --cores 8\
                                               --arguments {options.class_run}\
-                                              --l1i_size 40kB\
-                                              --l1d_size 40kB\
+                                              --l1i_size 32kB\
+                                              --l1d_size 32kB\
                                               --l2_size 512kB\
                                               --l3_size 16MB \
                                               {programs_location}{program}.intel'
