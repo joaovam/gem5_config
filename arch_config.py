@@ -35,7 +35,7 @@ system.mem_mode = 'timing'
 system.mem_ranges = [AddrRange('32GB')]
 
 #creating CPU
-system.cpu = [X86TimingSimpleCPU(cpu_id=i) for i in range(options.cores)]
+system.cpu = [O3CPU(cpu_id=i) for i in range(options.cores)]
 system.membus = SystemXBar()
 
 #Connecting Cache
@@ -43,8 +43,8 @@ for i in range(options.cores):
     system.cpu[i].icache = L1ICache(options)
     system.cpu[i].dcache = L1DCache(options)
 
-    system.cpu[i].icache.connectCPU(system.cpu)
-    system.cpu[i].dcache.connectCPU(system.cpu)
+    system.cpu[i].icache.connectCPU(system.cpu[i])
+    system.cpu[i].dcache.connectCPU(system.cpu[i])
 
 system.l2bus = L2XBar()
 system.l3bus = L2XBar()
