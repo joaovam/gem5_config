@@ -2,7 +2,7 @@ import re
 import subprocess
 import argparse
 
-gem5_location = "/gem5/build/X86/gem5.opt"
+gem5_location = "/gem5/gem5/build/X86/gem5.opt"
 script = "/gem5/gem5_config/arch_config.py"
 classes = ["Tiny", "Small"]
 programs = ["FAST", "FN", "GF", "IS", "KM", "LU", "NB", "RT", "TSP"]
