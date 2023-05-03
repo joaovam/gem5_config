@@ -32,7 +32,7 @@ system.clk_domain.clock = options.clock
 system.clk_domain.voltage_domain = VoltageDomain()
 
 system.mem_mode = 'timing'
-system.mem_ranges = [AddrRange('32GB')]
+system.mem_ranges = [AddrRange('16GB')]
 
 #creating CPU
 system.cpu = [O3CPU(cpu_id=i) for i in range(options.cores)]
@@ -74,7 +74,7 @@ for i in range(options.cores):
 system.system_port = system.membus.cpu_side_ports
 
 system.mem_ctrl = MemCtrl()
-system.mem_ctrl.dram = GDDR5_4000_2x32()
+system.mem_ctrl.dram = DDR4_2400_4x16()
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
