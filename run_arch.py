@@ -27,8 +27,8 @@ def main():
                                                   --cores 8\
                                                   --binary {program}.intel\
                                                   --arguments "{argument}"\
-                                                  --l1i_size 40kB\
-                                                  --l1d_size 40kB\
+                                                  --l1i_size 32kB\
+                                                  --l1d_size 32kB\
                                                   --l2_size 512kB\
                                                   --l3_size 16MB'
                     print("Running Command:")
