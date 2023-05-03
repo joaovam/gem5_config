@@ -38,7 +38,7 @@ class L1DCache(L1Cache):
         super(L1DCache, self).__init__(options)
         if not options or not options.l1d_size:
             return
-        self.size = options.ld_size
+        self.size = options.l1d_size
 
     def connectCPU(self, cpu):
         self.cpu_side = cpu.dcache_port
