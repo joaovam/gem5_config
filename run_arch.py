@@ -45,7 +45,9 @@ def main():
                                               --l3_size 16MB'
                 print("Running Command:")
                 print(' '.join(command.split()))
-                # subprocess.Popen(command.split())
+                p = subprocess.Popen(command.split())
+                p.wait()
+
 
 
 
