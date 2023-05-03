@@ -5,6 +5,7 @@ import argparse
 gem5_location = "/gem5/gem5/build/X86/gem5.opt"
 script = "/gem5/gem5_config/arch_config.py"
 programs_location = "/CAPBenchmarks/x86/bin/"
+test = "/gem5/gem5/tests/test-progs/hello/bin/x86/linux/hello"
 
 classes = ["Tiny", "Small"]
 programs = ["fast", "fn", "gf", "is", "km", "lu", "nb", "rt", "tsp"]
@@ -34,7 +35,7 @@ def main():
                     print("Running Command:")
                     print(' '.join(command.split()))
                     # subprocess.Popen(command.split())
-        else:
+        elif options.class_run == "test":
             for program in programs:
 
                 command = gem5_location + " " + script + f' --clock 3.2GHz\
@@ -44,7 +45,7 @@ def main():
                                               --l1d_size 32kB\
                                               --l2_size 512kB\
                                               --l3_size 16MB \
-                                              {programs_location}{program}.intel'
+                                              {test}'
 
 
 
