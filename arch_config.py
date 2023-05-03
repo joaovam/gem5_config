@@ -74,7 +74,7 @@ for i in range(options.cores):
 system.system_port = system.membus.cpu_side_ports
 
 system.mem_ctrl = MemCtrl()
-system.mem_ctrl.dram = DDR4_1600_32x32()
+system.mem_ctrl.dram = DDR4_2400_8x8(size="32GB")
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
