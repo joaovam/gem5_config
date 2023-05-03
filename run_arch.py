@@ -35,7 +35,7 @@ def main():
         else:
             for program in programs:
 
-                command = gem5_location + " " + script + f' --clock "3GHz"\
+                command = gem5_location + " " + script + f' --clock 3.2GHz\
                                               --cores 8\
                                               --arguments "{options.class_run}"\
                                               --l1i_size 40kB\
