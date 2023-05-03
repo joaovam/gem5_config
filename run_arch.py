@@ -7,7 +7,7 @@ script = "/gem5/gem5_config/arch_config.py"
 programs_location = "/CAPBenchmarks/x86/bin/"
 
 classes = ["Tiny", "Small"]
-programs = ["FAST", "FN", "GF", "IS", "KM", "LU", "NB", "RT", "TSP"]
+programs = ["fast", "fn", "gf", "is", "km", "lu", "nb", "rt", "tsp"]
 
 
 def main():
