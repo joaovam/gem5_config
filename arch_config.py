@@ -35,7 +35,7 @@ system.mem_mode = 'timing'
 system.mem_ranges = [AddrRange('32GB')]
 
 #creating CPU
-system.cpu = [O3CPU(cpu_id=i) for i in range(options.cores)]
+system.cpu = [X86TimingSimpleCPU(cpu_id=i) for i in range(options.cores)]
 system.membus = SystemXBar()
 
 #Connecting Cache
