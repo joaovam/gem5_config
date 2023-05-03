@@ -84,10 +84,13 @@ binary = '/gem5/gem5/tests/test-progs/hello/bin/x86/linux/hello'
 system.workload = SEWorkload.init_compatible(binary)
 
 process = Process()
+
 process.cmd = [options.binary]
 #FIX - create threads with multiple CPUs
-system.cpu.workload = process
-system.cpu.createThreads()
+
+for i in range(options.cores):
+    system.cpu[i].workload = process
+    system.cpu[i].createThreads()
 
 root = Root(full_system = False, system = system)
 m5.instantiate()
