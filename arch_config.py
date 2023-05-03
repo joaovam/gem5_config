@@ -1,9 +1,10 @@
 import m5
 from m5.objects import *
-import argparse
+
 from Cache.l1_cache import *
 from Cache.l2_cache import L2Cache
 from Cache.l3_cache import L3Cache
+import argparse
 
 parser = argparse.ArgumentParser(description='An O3 system with 3-level cache.')
 
@@ -20,15 +21,18 @@ parser.add_argument("--l2_size",
 parser.add_argument("--l3_size",
                     help="L3 cache size. Default: 512kB.")
 
+parser.add_argument("--clock",default="3GHz", help="the core of the processor, example: 3GHz")
+
 options = parser.parse_args()
+
 system = System()
 
 system.clk_domain = SrcClockDomain()
-system.clk_domain.clock = '1GHz'
+system.clk_domain.clock = options.clock
 system.clk_domain.voltage_domain = VoltageDomain()
 
 system.mem_mode = 'timing'
-system.mem_ranges = [AddrRange('8GB')]
+system.mem_ranges = [AddrRange('32GB')]
 
 #creating CPU
 system.cpu = [O3CPU(cpu_id=i) for i in range(options.cores)]
