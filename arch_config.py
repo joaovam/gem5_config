@@ -78,13 +78,13 @@ system.mem_ctrl.dram = DDR3_1600_8x8()
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
-binary = 'gem5/tests/test-progs/hello/bin/x86/linux/hello'
+binary = '/gem5/gem5/tests/test-progs/hello/bin/x86/linux/hello'
 
 # for gem5 V21 and beyond
 system.workload = SEWorkload.init_compatible(binary)
 
 process = Process()
-process.cmd = [binary]
+process.cmd = [options.binary]
 #FIX - create threads with multiple CPUs
 system.cpu.workload = process
 system.cpu.createThreads()
