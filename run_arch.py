@@ -32,6 +32,22 @@ def main():
                     print("Running Command:")
                     print(' '.join(command.split()))
                     # subprocess.Popen(command.split())
+        else:
+            for program in programs:
+
+                command = gem5_location + " " + script + f' --clock"3.2GHz"\
+                                              --cores 8\
+                                              --binary {program}.intel\
+                                              --arguments "{options.class_run}"\
+                                              --l1i_size 40kB\
+                                              --l1d_size 40kB\
+                                              --l2_size 512kB\
+                                              --l3_size 16MB'
+                print("Running Command:")
+                print(' '.join(command.split()))
+                # subprocess.Popen(command.split())
+
+
 
 
 if __name__ == "__main__":
