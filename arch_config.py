@@ -50,6 +50,7 @@ system.l2bus = L2XBar()
 system.l3bus = L2XBar()
 
 for i in range(options.cores):
+    system.cpu[i].numThreads = 2
     system.cpu[i].icache.connectBus(system.l2bus)
     system.cpu[i].dcache.connectBus(system.l2bus)
 
@@ -78,6 +79,11 @@ system.mem_ctrl.dram = DDR4_2400_16x4()
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
+system.disk_image = '/path/to/disk/image'
+
+# Set up kernel image
+system.kernel = '/path/to/kernel/image'
+
 binary = '/gem5/gem5/tests/test-progs/hello/bin/x86/linux/hello'
 
 # for gem5 V21 and beyond
@@ -101,3 +107,8 @@ exit_event = m5.simulate()
 print('Exiting @ tick {} because {}'
       .format(m5.curTick(), exit_event.getCause()))
 
+# Analyze results
+stats = m5.core.stats.create()
+statsVisitor = stats.createVisitor()
+system.visit(statsVisitor)
+statsVisitor.dump()
