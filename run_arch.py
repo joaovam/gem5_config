@@ -25,7 +25,7 @@ def main():
         if options.class_run == "all":
             for program in programs:
                 for argument in classes:
-                    command = gem5_location + " " + script + f' --clock "3.2GHz"\
+                    command = opt_location + " " + script + f' --clock "3.2GHz"\
                                                   --cores 8\
                                                   --binary {program}.intel\
                                                   --arguments "{argument}"\
