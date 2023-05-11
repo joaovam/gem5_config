@@ -6,7 +6,7 @@ gem5_location = "/home/joao.vieira/gem5/"
 opt_location = gem5_location + "gem5/build/X86/gem5.debug"
 script = gem5_location  +"gem5_config/arch_config.py"
 programs_location = "/home/joao.vieira/CAPBenchmarks/x86/bin/"
-test = gem5_location +"gem5/tests/test-progs/hello/bin/x86/linux/hello"
+test = gem5_location + "gem5/tests/test-progs/hello/bin/x86/linux/hello"
 
 classes = ["Tiny", "Small"]
 programs = ["fast", "fn", "gf", "is", "km", "lu", "nb", "rt", "tsp"]

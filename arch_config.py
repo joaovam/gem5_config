@@ -84,10 +84,9 @@ system.mem_ctrl.port = system.membus.mem_side_ports
 # Set up kernel image
 #system.kernel = '/path/to/kernel/image'
 
-binary = '/gem5/gem5/tests/test-progs/hello/bin/x86/linux/hello'
 
 # for gem5 V21 and beyond
-system.workload = SEWorkload.init_compatible(binary)
+system.workload = SEWorkload.init_compatible(options.binary)
 
 process = Process()
 
