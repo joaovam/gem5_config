@@ -37,7 +37,7 @@ def main():
                     print(' '.join(command.split()))
                     # subprocess.Popen(command.split())
         elif options.class_run == "test":
-            command = gem5_location + " " + script + f' --clock 3.2GHz\
+            command = opt_location + " " + script + f' --clock 3.2GHz\
                                           --cores 8\
                                           --arguments {options.class_run}\
                                           --l1i_size 32kB\
