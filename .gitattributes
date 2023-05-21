@@ -1,0 +1,5 @@
+linux-full-system/disk-image/shared filter=lfs diff=lfs merge=lfs -text
+linux-full-system/disk-image/x86root-parsec.img filter=lfs diff=lfs merge=lfs -text
+linux-full-system/disk-image/boot-exit filter=lfs diff=lfs merge=lfs -text
+linux-full-system/disk-image/packer filter=lfs diff=lfs merge=lfs -text
+linux-full-system/disk-image/packer_1.4.3_linux_amd64.zip filter=lfs diff=lfs merge=lfs -text
