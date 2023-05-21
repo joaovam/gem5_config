@@ -1,3 +1,5 @@
 ./linux-full-system/disk-image/packer
 ./linux-full-system/disk-image/x86root-parsec.img
 linux-6.3.3/*
+linux-6.3.3
+linux-6.3.3.tar.xz
