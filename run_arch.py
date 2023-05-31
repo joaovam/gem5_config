@@ -26,7 +26,7 @@ def main():
     output_file = "out_" + options.program + "_" + options.classr + " "
     if options.arch1:
 
-        # os.mkdir("/home/joao.vieira/gem5/out")
+        os.mkdir("/home/joao.vieira/gem5/out")
         command = opt_location + f" --listener-mode=on \
         --outdir=/home/joao.vieira/gem5/gem5_config/{output_file}"\
                   + script + f' --clock "3.2GHz"\
