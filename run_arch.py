@@ -55,7 +55,7 @@ def main():
                                               --l3_size 16MB \
                                               '
 
-    command+= f'kernel={kernel} disk_image={disk_image}'
+    command+= f'--kernel={kernel} --disk_image={disk_image}'
     print("Running Command:")
     print(' '.join(command.split()))
     p = subprocess.Popen(command.split())
