@@ -29,7 +29,7 @@ def main():
         #os.mkdir("/home/joao.vieira/gem5/out")
         command = opt_location + f" --listener-mode=on \
         --outdir=/home/joao.vieira/gem5/gem5_config/{output_file}"\
-                  + script + f' --clock "3GHz"\
+                  + script + f' --clock 3.2GHz\
                                       --cores 8\
                                       --l1i_size 32kB\
                                       --l1d_size 32kB\
