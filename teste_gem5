@@ -1,2 +1,0 @@
-~/Documents/gem5/build/X86/gem5.opt ~/Documents/gem5/configs/example/fs.py --disk-image=linux-full-system/disk-image/x86root-parsec.img --kernel=linux-full-system/vmlinux-5.4.49 
-

@@ -22,6 +22,8 @@ parser.add_argument("--l3_size",
                     help="L3 cache size. Default: 512kB.")
 
 parser.add_argument("--clock",default="3GHz", help="the core of the processor, example: 3GHz")
+parser.add_argument("--disk_image", help="Disk image to be used with gem5")
+parser.add_argument("--kernel", help="Compiled kernel to be used")
 
 options = parser.parse_args()
 
@@ -79,25 +81,25 @@ system.mem_ctrl.dram = DDR4_2400_16x4()
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
-#system.disk_image = '/path/to/disk/image'
+system.disk_image = options.disk_image
 
 # Set up kernel image
-#system.kernel = '/path/to/kernel/image'
+system.kernel = options.kernel
 
 
 # for gem5 V21 and beyond
-system.workload = SEWorkload.init_compatible(options.binary)
+#system.workload = SEWorkload.init_compatible(options.binary)
 
 process = Process()
 
-process.cmd = [options.binary]
+#process.cmd = [options.binary]
 #FIX - create threads with multiple CPUs
 
-for i in range(options.cores):
-    system.cpu[i].workload = process
-    system.cpu[i].createThreads()
+#for i in range(options.cores):
+ #   system.cpu[i].workload = process
+  #  system.cpu[i].createThreads()
 
-root = Root(full_system = False, system = system)
+root = Root(full_system=True, system=system)
 m5.instantiate()
 
 print("Beginning simulation!")
@@ -107,7 +109,7 @@ print('Exiting @ tick {} because {}'
       .format(m5.curTick(), exit_event.getCause()))
 
 # Analyze results
-stats = m5.core.stats.create()
-statsVisitor = stats.createVisitor()
-system.visit(statsVisitor)
-statsVisitor.dump()
+# stats = m5.core.stats.create()
+# statsVisitor = stats.createVisitor()
+# system.visit(statsVisitor)
+# statsVisitor.dump()
