@@ -26,7 +26,7 @@ def main():
     output_file = "out_" + options.program + "_" + options.classr + " "
     if options.arch1:
 
-        os.mkdir("/home/joao.vieira/gem5/out")
+        #os.mkdir("/home/joao.vieira/gem5/out")
         command = opt_location + f" --listener-mode=on \
         --outdir=/home/joao.vieira/gem5/gem5_config/{output_file}"\
                   + script + f' --clock "3.2GHz"\
@@ -58,8 +58,8 @@ def main():
     command+= f'kernel={kernel} disk_image={disk_image}'
     print("Running Command:")
     print(' '.join(command.split()))
-    # p = subprocess.Popen(command.split())
-    # p.wait()
+    p = subprocess.Popen(command.split())
+    p.wait()
 
 
 
