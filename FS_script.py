@@ -16,6 +16,8 @@ parser.add_argument("--l2_size",
                     help="L2 cache size. Default: 256kB.")
 parser.add_argument("--l3_size",
                     help="L3 cache size. Default: 512kB.")
+parser.add_argument("--cpu_clock",
+                    help="CPU clock")
 
 options = parser.parse_args()
 
@@ -23,9 +25,9 @@ command = f"""
 nohup /home/joao.vieira/gem5/gem5/build/X86/gem5.opt --listener-mode=on \
  --outdir=/home/joao.vieira/gem5/gem5_config/{options.output}.out \
  /home/joao.vieira/gem5/gem5/configs/example/fs.py -n {options.cores} \
- --cpu-clock 3.2GHz \
+ --cpu-clock {options.cpu_clock} \
  --mem-type DDR4_2400_16x4 \
- --mem-size 32GB \
+ --mem-size 4GB \
  --l1d_size {options.l1d_size} \
  --l1i_size {options.l1i_size} \
  --l2_size {options.l2_size} \
