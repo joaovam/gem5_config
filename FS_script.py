@@ -27,7 +27,7 @@ nohup /home/joao.vieira/gem5/gem5/build/X86/gem5.opt --listener-mode=on \
  /home/joao.vieira/gem5/gem5/configs/example/fs.py -n {options.cores} \
  --cpu-clock {options.cpu_clock} \
  --mem-type DDR4_2400_16x4 \
- --mem-size 4GB \
+ --mem-size 2GB \
  --l1d_size {options.l1d_size} \
  --l1i_size {options.l1i_size} \
  --l2_size {options.l2_size} \
