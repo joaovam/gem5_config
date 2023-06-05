@@ -90,7 +90,7 @@ system.kernel = options.kernel
 # for gem5 V21 and beyond
 #system.workload = SEWorkload.init_compatible(options.binary)
 
-process = Process()
+#process = Process()
 
 #process.cmd = [options.binary]
 #FIX - create threads with multiple CPUs

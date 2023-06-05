@@ -68,3 +68,17 @@ def main():
 
 if __name__ == "__main__":
     main()
+#flags to be used with FS example
+# -n NUM_CPUS
+# --sys-clock SYS-CLOCK
+# --mem-type DDR4_2400_16x4
+# --mem-size 32GB
+# --l1d_size L1D_SIZE
+# --l1i_size L1I_SIZE
+# --l2_size L2_SIZE
+# --l3_size L3_SIZE
+# --cpu-type X86O3CPU,X86TimingSimpleCPU
+# --disk-image DISK_IMAGE
+# --kernel KERNEL
+# --listener-mode=on
+# --outdir=/home/joao.vieira/gem5/gem5_config/out_

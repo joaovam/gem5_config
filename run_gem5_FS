@@ -1,5 +1,16 @@
-~/Documents/gem5/build/X86/gem5.opt ~/Documents/gem5/configs/example/fs.py --disk-image=linux-full-system/disk-image/x86root-parsec.img --kernel=linux-full-system/vmlinux-5.4.49 
 
-/home/joao.vieira/gem5/gem5/build/X86/gem5.opt /home/joao.vieira/gem5/gem5/configs/example/fs.py\
---disk-image=linux-full-system/disk-image/x86root-parsec.img --kernel=linux-full-system/vmlinux-5.4.49\
---listener-mode=on --outdir=/home/joao.vieira/gem5/gem5_config/out_
+ARCH 1
+nohup /home/joao.vieira/gem5/gem5/build/X86/gem5.opt --listener-mode=on \
+ --outdir=/home/joao.vieira/gem5/gem5_config/out_fast_Tiny \
+ /home/joao.vieira/gem5/gem5/configs/example/fs.py -n 8 \
+ --cpu-clock 3.2GHz \
+ --mem-type DDR4_2400_16x4 \
+ --mem-size 32GB \
+ --l1d_size 32kB \
+ --l1i_size 32kB \
+ --l2_size 512kB \
+ --l3_size 16MB \
+ --cpu-type X86TimingSimpleCPU \
+ --disk-image=linux-full-system/disk-image/x86root-parsec.img \
+ --kernel=linux-full-system/vmlinux-5.4.49 &
+
