@@ -18,6 +18,8 @@ parser.add_argument("--l3_size",
                     help="L3 cache size. Default: 512kB.")
 parser.add_argument("--cpu_clock",
                     help="CPU clock")
+parser.add_argument("--script",
+                    help="Script to be used [program][class][n threads]")
 
 options = parser.parse_args()
 
@@ -34,7 +36,8 @@ nohup /home/joao.vieira/gem5/gem5/build/X86/gem5.opt --listener-mode=on \
  --l3_size {options.l3_size} \
  --cpu-type X86TimingSimpleCPU \
  --disk-image=linux-full-system/disk-image/x86root-parsec.img \
- --kernel=linux-full-system/vmlinux-5.4.49 > {options.output}_nohup.log &
+ --kernel=linux-full-system/vmlinux-5.4.49 > {options.output}_nohup.log \
+ --script scripts/{options.script}&
 """
 
 print("Run Command:")
