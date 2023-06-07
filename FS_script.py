@@ -37,7 +37,7 @@ nohup /home/joao.vieira/gem5/gem5/build/X86/gem5.opt --listener-mode=on \
  --cpu-type X86TimingSimpleCPU \
  --disk-image=linux-full-system/disk-image/x86root-parsec.img \
  --kernel=linux-full-system/vmlinux-5.4.49 > {options.output}_nohup.log \
- --script scripts/{options.script}&
+ --script scripts/{options.script} && touch {options.script}_finalized_successful&
 """
 
 print("Run Command:")
