@@ -25,7 +25,7 @@ options = parser.parse_args()
 
 command = f"""
 nohup /home/joao.vieira/gem5/gem5/build/X86/gem5.opt --listener-mode=on \
- --outdir=/home/joao.vieira/gem5/gem5_config/{options.output}.out \
+ --outdir=/home/joao.vieira/gem5/gem5_config/results/{options.output}.out \
  /home/joao.vieira/gem5/gem5/configs/example/fs.py -n {options.cores} \
  --cpu-clock {options.cpu_clock} \
  --mem-type DDR4_2400_16x4 \
