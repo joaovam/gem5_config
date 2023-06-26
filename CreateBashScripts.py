@@ -5,9 +5,9 @@ TOTAL_CORES = 28
 cap_classes = ["tiny", "small", "standard", "large", "huge"]
 
 for p in cap_programs:
-    for core in range(1,TOTAL_CORES, 1):
+    for core in range(1, TOTAL_CORES, 1):
         for c in cap_classes:
-            command = f"/CAPBENCH/{p} --nthread {core+1} --class {c}"
+            command = f"/CAPBENCH/{p} --nthread {(core+1) * 2} --class {c}"
             print(command)
             with open(f"{p}_{c}_{core}", "w") as file:
                 file.write(command + '\n')
