@@ -28,16 +28,20 @@ nohup /home/joao.vieira/gem5/gem5/build/X86/gem5.opt --listener-mode=on \
  --outdir=/home/joao.vieira/gem5/gem5_config/results/{options.output}.out \
  /home/joao.vieira/gem5/gem5/configs/example/fs.py -n {options.cores} \
  --cpu-clock {options.cpu_clock} \
- --mem-type DDR4_2400_16x4 \
  --mem-size 2GB \
+ --smt \
+ --caches \
+ --l2cache \
+ --num-l2caches {options.cores} \
+ --num-l3caches 1
  --l1d_size {options.l1d_size} \
  --l1i_size {options.l1i_size} \
  --l2_size {options.l2_size} \
  --l3_size {options.l3_size} \
- --cpu-type=DerivO3CPU \
  --disk-image=linux-full-system/disk-image/x86root-parsec.img \
- --kernel=linux-full-system/vmlinux-5.4.49 > {options.output}_nohup.log \
- --script scripts/{options.script} --caches &
+ --cpu-type=DerivO3CPU \
+ --kernel=linux-full-system/vmlinux-5.4.49 \
+ --script scripts/{options.script} > {options.output}_nohup.log  &
 """
 
 print("Run Command:")
