@@ -227,7 +227,7 @@ def build_test_system(np):
 
 
 
-        #test_sys.system_port = test_sys.membus.cpu_side_ports
+        test_sys.system_port = test_sys.membus.cpu_side_ports
 
         for i in range(np):
             test_sys.cpu[i].createInterruptController()
@@ -279,7 +279,7 @@ def build_test_system(np):
         ):
             CpuConfig.config_etrace(TestCPUClass, test_sys.cpu, args)
 
-        CacheConfig.config_cache(args, test_sys)
+        #CacheConfig.config_cache(args, test_sys)
 
         MemConfig.config_mem(args, test_sys)
 
