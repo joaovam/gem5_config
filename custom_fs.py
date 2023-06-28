@@ -182,13 +182,13 @@ def build_test_system(np):
             test_sys.l3bus = L3XBar()
 
             for i in range(np):
-                test_sys.cpu[i].icache = L1ICache("32kB")
-                test_sys.cpu[i].dcache = L1DCache("32kB")
+                icache = L1ICache("32kB")
+                dcache = L1DCache("32kB")
 
                 # test_sys.cpu[i].icache.connectCPU(test_sys.cpu[i])
                 # test_sys.cpu[i].dcache.connectCPU(test_sys.cpu[i])
                 test_sys.cpu[i].addPrivateSplitL1Caches(
-                    test_sys.cpu[i].icache, test_sys.cpu[i].dcache, None, None
+                    icache, dcache, PageTableWalkerCache(), PageTableWalkerCache()
                 )
 
                 test_sys.cpu[i].l2cache = L2Cache("2MB")
@@ -202,13 +202,6 @@ def build_test_system(np):
             test_sys.l3cache = L3Cache("64MB")
             test_sys.l3cache.connectCPUSideBus(test_sys.l3bus)
             test_sys.l3cache.connectMemSideBus(test_sys.membus)
-
-            for i in range(np):
-                test_sys.cpu[i].connectAllPorts(
-                    test_sys.l3bus.cpu_side_ports,
-                    test_sys.membus.cpu_side_ports,
-                    test_sys.membus.mem_side_ports,
-                )
 
         else: #Cria arch AMD
             test_sys.l3bus = L3XBar()
