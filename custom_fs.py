@@ -242,7 +242,7 @@ def build_test_system(np):
             test_sys.cpu[i].interrupts[0].int_requestor = test_sys.membus.cpu_side_ports
             test_sys.cpu[i].interrupts[0].int_responder = test_sys.membus.mem_side_ports
             test_sys.cpu[i].connectAllPorts(
-                test_sys.tol2bus.cpu_side_ports,
+                test_sys.l2bus.cpu_side_ports,
                 test_sys.membus.cpu_side_ports,
                 test_sys.membus.mem_side_ports,
             )
