@@ -185,8 +185,11 @@ def build_test_system(np):
                 test_sys.cpu[i].icache = L1ICache("32kB")
                 test_sys.cpu[i].dcache = L1DCache("32kB")
 
-                test_sys.cpu[i].icache.connectCPU(test_sys.cpu[i])
-                test_sys.cpu[i].dcache.connectCPU(test_sys.cpu[i])
+                # test_sys.cpu[i].icache.connectCPU(test_sys.cpu[i])
+                # test_sys.cpu[i].dcache.connectCPU(test_sys.cpu[i])
+                test_sys.cpu[i].addPrivateSplitL1Caches(
+                    test_sys.cpu[i].icache, test_sys.cpu[i].dcache, None, None
+                )
 
                 test_sys.cpu[i].l2cache = L2Cache("2MB")
 
