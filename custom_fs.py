@@ -191,8 +191,8 @@ def build_test_system(np):
                 test_sys.cpu[i].itb_walker_cache = PageTableWalkerCache()
                 test_sys.cpu[i].dtb_walker_cache = PageTableWalkerCache()
 
-                test_sys.cpu[i].itb.walker.port = test_sys.cpu[i].itb_walker_cache.cpu_side
-                test_sys.cpu[i].dtb.walker.port = test_sys.cpu[i].dtb_walker_cache.cpu_side
+                test_sys.cpu[i].mmu.itb.walker.port = test_sys.cpu[i].itb_walker_cache.cpu_side
+                test_sys.cpu[i].mmu.dtb.walker.port = test_sys.cpu[i].dtb_walker_cache.cpu_side
 
                 test_sys.cpu[i].l2cache = L2Cache("2MB")
 
