@@ -203,6 +203,13 @@ def build_test_system(np):
             test_sys.l3cache.connectCPUSideBus(test_sys.l3bus)
             test_sys.l3cache.connectMemSideBus(test_sys.membus)
 
+            for i in range(np):
+                test_sys.cpu[i].connectAllPorts(
+                    test_sys.l3bus.cpu_side_ports,
+                    test_sys.membus.cpu_side_ports,
+                    test_sys.membus.mem_side_ports,
+                )
+
         else: #Cria arch AMD
             test_sys.l3bus = L3XBar()
 
