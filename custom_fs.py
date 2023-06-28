@@ -54,7 +54,7 @@ from Cache.l1_cache import L1ICache, L1DCache
 from Cache.l2_cache import L2Cache
 from Cache.l3_cache import L3Cache
 
-addToPath("../")
+addToPath("../gem5/configs/")
 
 from ruby import Ruby
 
