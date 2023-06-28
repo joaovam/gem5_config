@@ -53,11 +53,12 @@ from gem5.runtime import get_runtime_isa
 from Cache.l1_cache import L1ICache, L1DCache
 from Cache.l2_cache import L2Cache
 from Cache.l3_cache import L3Cache
-from common.Caches import IOCache
+
+
 addToPath("../gem5/configs/")
 
 from ruby import Ruby
-
+from common.Caches import IOCache
 from common.FSConfig import *
 from common.SysPaths import *
 from common.Benchmarks import *
