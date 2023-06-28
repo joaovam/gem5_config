@@ -62,7 +62,7 @@ from common.FSConfig import *
 from common.SysPaths import *
 from common.Benchmarks import *
 from common import Simulation
-from common import CacheConfig
+from common.Caches import PageTableWalkerCache
 from common import CpuConfig
 from common import MemConfig
 from common import ObjectList
