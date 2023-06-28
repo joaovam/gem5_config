@@ -36,9 +36,6 @@ class L1ICache(L1Cache):
 
 class L1DCache(L1Cache):
     size = '32kB'
-    is_read_only = True
-    # Writeback clean lines as well
-    writeback_clean = True
 
     def __init__(self, size='32kB'):
         super(L1DCache, self).__init__()
