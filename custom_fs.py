@@ -227,7 +227,7 @@ def build_test_system(np):
 
 
 
-        test_sys.system_port = test_sys.membus.cpu_side_ports
+        #test_sys.system_port = test_sys.membus.cpu_side_ports
 
         for i in range(np):
             test_sys.cpu[i].createInterruptController()
