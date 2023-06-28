@@ -182,20 +182,28 @@ def build_test_system(np):
             test_sys.l3bus = L3XBar()
 
             for i in range(np):
-                icache = L1ICache("32kB")
-                dcache = L1DCache("32kB")
+                test_sys.cpu[i].icache = L1ICache("32kB")
+                test_sys.cpu[i].dcache = L1DCache("32kB")
 
-                # test_sys.cpu[i].icache.connectCPU(test_sys.cpu[i])
-                # test_sys.cpu[i].dcache.connectCPU(test_sys.cpu[i])
-                test_sys.cpu[i].addPrivateSplitL1Caches(
-                    icache, dcache, PageTableWalkerCache(), PageTableWalkerCache()
-                )
+                test_sys.cpu[i].icache.connectCPU(test_sys.cpu[i])
+                test_sys.cpu[i].dcache.connectCPU(test_sys.cpu[i])
+
+                test_sys.cpu[i].itb_walker_cache = PageTableWalkerCache()
+                test_sys.cpu[i].dtb_walker_cache = PageTableWalkerCache()
+
+                test_sys.cpu[i].itb.walker.port = test_sys.cpu[i].itb_walker_cache.cpu_side
+                test_sys.cpu[i].dtb.walker.port = test_sys.cpu[i].dtb_walker_cache.cpu_side
 
                 test_sys.cpu[i].l2cache = L2Cache("2MB")
 
                 test_sys.cpu[i].l2bus = L2XBar()
                 test_sys.cpu[i].icache.connectBus(test_sys.cpu[i].l2bus)
                 test_sys.cpu[i].dcache.connectBus(test_sys.cpu[i].l2bus)
+
+                test_sys.cpu[i].itb_walker_cache.mem_side = test_sys.cpu[i].l2bus.cpu_side_ports
+                test_sys.cpu[i].dtb_walker_cache.mem_side = test_sys.cpu[i].l2bus.cpu_side_ports
+
+
                 test_sys.cpu[i].l2cache.connectCPUSideBus(test_sys.cpu[i].l2bus)
                 test_sys.cpu[i].l2cache.connectMemSideBus(test_sys.l3bus)
 
@@ -241,8 +249,6 @@ def build_test_system(np):
             test_sys.cpu[i].interrupts[0].pio = test_sys.membus.mem_side_ports
             test_sys.cpu[i].interrupts[0].int_requestor = test_sys.membus.cpu_side_ports
             test_sys.cpu[i].interrupts[0].int_responder = test_sys.membus.mem_side_ports
-
-            test_sys.cpu[i].connectCachedPorts(test_sys.cpu[i].l2bus.cpu_side_ports)
 
 
 
