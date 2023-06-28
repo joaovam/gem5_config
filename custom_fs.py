@@ -53,7 +53,7 @@ from gem5.runtime import get_runtime_isa
 from Cache.l1_cache import L1ICache, L1DCache
 from Cache.l2_cache import L2Cache
 from Cache.l3_cache import L3Cache
-
+from common.Caches import IOCache
 addToPath("../gem5/configs/")
 
 from ruby import Ruby
@@ -84,8 +84,10 @@ def cmd_line_template():
 
 
 def build_test_system(np):
+
     cmdline = cmd_line_template()
     isa = get_runtime_isa()
+
     if isa == ISA.MIPS:
         test_sys = makeLinuxMipsSystem(test_mem_mode, bm[0], cmdline=cmdline)
     elif isa == ISA.SPARC:
@@ -179,6 +181,12 @@ def build_test_system(np):
 
     else:
         if args.intel_arch:
+
+            # By default the IOCache runs at the system clock
+            test_sys.iocache = IOCache(addr_ranges=test_sys.mem_ranges)
+            test_sys.iocache.cpu_side = test_sys.iobus.mem_side_ports
+            test_sys.iocache.mem_side = test_sys.membus.cpu_side_ports
+
             test_sys.l3bus = L3XBar()
 
             for i in range(np):
@@ -249,6 +257,7 @@ def build_test_system(np):
             test_sys.cpu[i].interrupts[0].pio = test_sys.membus.mem_side_ports
             test_sys.cpu[i].interrupts[0].int_requestor = test_sys.membus.cpu_side_ports
             test_sys.cpu[i].interrupts[0].int_responder = test_sys.membus.mem_side_ports
+            test_sys.cpu[i].connectBus(test_sys.membus)
 
 
 
@@ -427,7 +436,7 @@ else:
                 os_type=args.os_type,
             ),
         ]
-    else:
+    else:#Entramos nesse
         bm = [
             SysConfig(
                 disks=args.disk_image,
