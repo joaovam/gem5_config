@@ -258,7 +258,7 @@ def build_test_system(np):
             test_sys.cpu[i].interrupts[0].pio = test_sys.membus.mem_side_ports
             test_sys.cpu[i].interrupts[0].int_requestor = test_sys.membus.cpu_side_ports
             test_sys.cpu[i].interrupts[0].int_responder = test_sys.membus.mem_side_ports
-            test_sys.cpu[i].connectBus(test_sys.membus)
+            #test_sys.cpu[i].connectBus(test_sys.membus)
 
 
 
