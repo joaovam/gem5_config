@@ -66,7 +66,6 @@ from common import CacheConfig
 from common import CpuConfig
 from common import MemConfig
 from common import ObjectList
-from common.Caches import *
 from common import Options
 
 
