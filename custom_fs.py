@@ -197,7 +197,6 @@ def build_test_system(np):
 
             test_sys.l3cache = L3Cache("64MB")
             test_sys.l3cache.connectCPUSideBus(test_sys.l3bus)
-            test_sys.membus = SystemXBar()
             test_sys.l3cache.connectMemSideBus(test_sys.membus)
 
         else: #Cria arch AMD
@@ -221,7 +220,6 @@ def build_test_system(np):
             test_sys.l3cache2 = L3Cache("32MB")
             test_sys.l3cache1.connectCPUSideBus(test_sys.l3bus)
             test_sys.l3cache2.connectCPUSideBus(test_sys.l3bus)
-            test_sys.membus = SystemXBar()
             test_sys.l3cache1.connectMemSideBus(test_sys.membus)
             test_sys.l3cache2.connectMemSideBus(test_sys.membus)
 
