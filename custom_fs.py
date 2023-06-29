@@ -221,24 +221,36 @@ def build_test_system(np):
             test_sys.l3cache.connectMemSideBus(test_sys.membus)
 
         else: #Cria arch AMD
+
+            # By default the IOCache runs at the system clock
+            test_sys.iocache = IOCache(addr_ranges=test_sys.mem_ranges)
+            test_sys.iocache.cpu_side = test_sys.iobus.mem_side_ports
+            test_sys.iocache.mem_side = test_sys.membus.cpu_side_ports
+
             test_sys.l3bus = L3XBar()
 
             for i in range(np):
                 test_sys.cpu[i].icache = L1ICache("32kB")
                 test_sys.cpu[i].dcache = L1DCache("32kB")
 
-                test_sys.cpu[i].addPrivateSplitL1Caches(
-                    test_sys.cpu[i].icache, test_sys.cpu[i].dcache, None, None
-                )
+                test_sys.cpu[i].icache.connectCPU(test_sys.cpu[i])
+                test_sys.cpu[i].dcache.connectCPU(test_sys.cpu[i])
 
-                # test_sys.cpu[i].icache.connectCPU(test_sys.cpu[i])
-                # test_sys.cpu[i].dcache.connectCPU(test_sys.cpu[i])
+                test_sys.cpu[i].itb_walker_cache = PageTableWalkerCache()
+                test_sys.cpu[i].dtb_walker_cache = PageTableWalkerCache()
+
+                test_sys.cpu[i].mmu.itb.walker.port = test_sys.cpu[i].itb_walker_cache.cpu_side
+                test_sys.cpu[i].mmu.dtb.walker.port = test_sys.cpu[i].dtb_walker_cache.cpu_side
 
                 test_sys.cpu[i].l2cache = L2Cache("1MB")
 
                 test_sys.cpu[i].l2bus = L2XBar()
                 test_sys.cpu[i].icache.connectBus(test_sys.cpu[i].l2bus)
                 test_sys.cpu[i].dcache.connectBus(test_sys.cpu[i].l2bus)
+
+                test_sys.cpu[i].itb_walker_cache.mem_side = test_sys.membus.cpu_side_ports
+                test_sys.cpu[i].dtb_walker_cache.mem_side = test_sys.membus.cpu_side_ports
+
                 test_sys.cpu[i].l2cache.connectCPUSideBus(test_sys.cpu[i].l2bus)
                 test_sys.cpu[i].l2cache.connectMemSideBus(test_sys.l3bus)
 
@@ -248,8 +260,6 @@ def build_test_system(np):
             test_sys.l3cache2.connectCPUSideBus(test_sys.l3bus)
             test_sys.l3cache1.connectMemSideBus(test_sys.membus)
             test_sys.l3cache2.connectMemSideBus(test_sys.membus)
-
-
 
         #test_sys.system_port = test_sys.membus.cpu_side_ports
 
