@@ -1,11 +1,11 @@
 from m5.objects import Cache
 
 class L2Cache(Cache):
-    assoc = 2
+    assoc = 8
     size = '2MB'
     tag_latency = 2
     data_latency = 2
-    response_latency = 2
+    response_latency = 10
     mshrs = 4
     tgts_per_mshr  = 20
 

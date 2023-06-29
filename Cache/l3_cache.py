@@ -1,11 +1,11 @@
 from m5.objects import Cache
 
 class L3Cache(Cache):
-    assoc = 2
+    assoc = 16
     size = '64MB'
     tag_latency = 2
     data_latency = 2
-    response_latency = 2
+    response_latency = 50
     mshrs = 4
     tgts_per_mshr = 20
 
