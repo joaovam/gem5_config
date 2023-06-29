@@ -9,9 +9,11 @@ class L3Cache(Cache):
     mshrs = 4
     tgts_per_mshr = 20
 
-    def __init__(self, size="64MB"):
+
+    def __init__(self, addr_ranges, size="64MB"):
         super(L3Cache, self).__init__()
 
+        self.addr_ranges = addr_ranges
         self.size = size
 
     def connectCPUSideBus(self, bus):
