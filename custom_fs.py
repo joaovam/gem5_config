@@ -209,8 +209,8 @@ def build_test_system(np):
                 test_sys.cpu[i].icache.connectBus(test_sys.cpu[i].l2bus)
                 test_sys.cpu[i].dcache.connectBus(test_sys.cpu[i].l2bus)
 
-                test_sys.cpu[i].itb_walker_cache.mem_side = test_sys.cpu[i].l2bus.cpu_side_ports
-                test_sys.cpu[i].dtb_walker_cache.mem_side = test_sys.cpu[i].l2bus.cpu_side_ports
+                test_sys.cpu[i].itb_walker_cache.mem_side = test_sys.membus.cpu_side_ports
+                test_sys.cpu[i].dtb_walker_cache.mem_side = test_sys.membus.cpu_side_ports
 
 
                 test_sys.cpu[i].l2cache.connectCPUSideBus(test_sys.cpu[i].l2bus)
