@@ -255,8 +255,8 @@ def build_test_system(np):
                 test_sys.cpu[i].l2cache.connectCPUSideBus(test_sys.cpu[i].l2bus)
                 test_sys.cpu[i].l2cache.connectMemSideBus(test_sys.l3bus)
 
-            test_sys.l3cache1 = L3Cache(AddrRange(start='0x0', end='0x7fffffffffffffff'), "32MB")
-            test_sys.l3cache2 = L3Cache(AddrRange(start='0x8000000000000000', end='0xffffffffffffffff'), "32MB")
+            test_sys.l3cache1 = L3Cache(AddrRange(start='0x0', end='0x100000000'), "32MB")
+            test_sys.l3cache2 = L3Cache(AddrRange(start='0x100000001', end='0xffffffffffffffff'), "32MB")
             test_sys.l3cache1.connectCPUSideBus(test_sys.l3bus)
             test_sys.l3cache2.connectCPUSideBus(test_sys.l3bus)
             test_sys.l3cache1.connectMemSideBus(test_sys.membus)
