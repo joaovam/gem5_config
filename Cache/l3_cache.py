@@ -6,8 +6,8 @@ class L3Cache(Cache):
     tag_latency = 20
     data_latency = 20
     response_latency = 1
-    mshrs: int = 20,
-    tgts_per_mshr: int = 12,
+    mshrs: int = 20
+    tgts_per_mshr: int = 12
 
 
     def __init__(self, addr_ranges, size="64MB"):
