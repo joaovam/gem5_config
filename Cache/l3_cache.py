@@ -3,11 +3,11 @@ from m5.objects import Cache
 class L3Cache(Cache):
     assoc = 16
     size = '64MB'
-    tag_latency = 2
-    data_latency = 2
-    response_latency = 50
-    mshrs = 4
-    tgts_per_mshr = 20
+    tag_latency = 20
+    data_latency = 20
+    response_latency = 1
+    mshrs: int = 20,
+    tgts_per_mshr: int = 12,
 
 
     def __init__(self, addr_ranges, size="64MB"):

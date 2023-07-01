@@ -3,11 +3,11 @@ from m5.objects import Cache
 class L2Cache(Cache):
     assoc = 8
     size = '2MB'
-    tag_latency = 2
-    data_latency = 2
-    response_latency = 10
-    mshrs = 4
-    tgts_per_mshr  = 20
+    tag_latency = 10
+    data_latency = 10
+    response_latency = 1
+    mshrs: int = 20
+    tgts_per_mshr: int = 12
 
     def __init__(self, size="2MB"):
         super(L2Cache, self).__init__()
