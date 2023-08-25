@@ -23,7 +23,7 @@ def main():
 def run_classes(program, c, t):
     command = f"nohup perf stat -o ./results/real_results/{program}_{c}_{t} -B -e cache-references,cache-misses,cycles,instructions,branches,faults,migrations /home/joao.vieira/CAPBenchmarks/x86/bin/{program} --nthreads {t} --class {c} > {program}_{c}_{t}_real &"
     print("Running: ", command)
-    #os.system(command)
+    os.system(command)
 
 if __name__ == "__main__":
     main()
