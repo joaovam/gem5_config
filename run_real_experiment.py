@@ -11,7 +11,7 @@ def main():
     parser.add_argument("-c", type=str, default="standard", help="The class to be run, defaults to standard")
     options = parser.parse_args()
 
-    sizes = [2, 4, 8, 16, 24]
+    sizes = [2, 4, 8, 12]
     os.system("export OMP_PROC_BIND=true")
     os.system("export OMP_NUM_THREADS=$(nproc)")
     for t in sizes:
