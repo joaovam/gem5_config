@@ -12,7 +12,8 @@ def main():
     options = parser.parse_args()
 
     sizes = [2, 4, 8, 16, 24]
-
+    os.system("export OMP_PROC_BIND=true")
+    os.system("export OMP_NUM_THREADS=$(nproc)")
     for t in sizes:
         thread = Thread(target=run_classes, args=(options.program, options.c, t))
         thread.start()
